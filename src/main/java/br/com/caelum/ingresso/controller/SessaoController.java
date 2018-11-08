@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +54,7 @@ public	class SessaoController	{
 				return	new	ModelAndView("redirect:/admin/sala/"	+	form.getSalaId()	+	"/sessoes");
 			} else {
 				System.out.println("Não pode colocar nesta sessão.");
+				result.addError(new FieldError("sessaoForm", "horario", "sessao conflitante"));
 			}
 			return	form(form.getSalaId(),	form);	
 		}
